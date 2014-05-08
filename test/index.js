@@ -2,16 +2,18 @@ var should = require('chai').should(),
 	mtdb = require('../index');
 
 describe('Individual Card Functions', function() {
-	it ('Gets a single card by ID', function(done) {
-		mtdb.getSingleCard(380449, function(card) {
-			card.name.should.equal('Launch the Fleet');
+	it ('Gets a single card by ID, and its associated image', function(done) {
+		mtdb.getSingleCard(380449, function(cardObject) {
+			cardObject.cardImage.should.have.string(cardObject.cardData.id);
+			cardObject.cardData.name.should.equal('Launch the Fleet');
 			done();
 		});
 	});
 
-	it ('Gets a single random card', function(done) {
-		mtdb.getRandomCard(function(card) {
-			card.should.have.ownProperty('name');
+	it ('Gets a single random card, and its associated image', function(done) {
+		mtdb.getRandomCard(function(cardObject) {
+			cardObject.cardImage.should.have.string(cardObject.cardData.id);
+			cardObject.cardData.should.have.ownProperty('name');
 			done();
 		})
 	})

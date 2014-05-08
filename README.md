@@ -12,15 +12,17 @@ A simple wrapper for the MtgDB API Project (found here: http://api.mtgdb.info/)
 	var mtgDb = require('mtgdb-wrapper');
 
 	//Get card by ID
-	mtgdb.getSingleCard(380449, function(card) {
+	mtgdb.getSingleCard(380449, function(cardObject) {
 		//Launch the Fleet
-		console.log(card);
+		console.log(cardObject.cardData);
+		console.log(cardObject.cardImage);
 	});
 
 	//Get random card
-	mtgdb.getRandomCard(function(card) {
+	mtgdb.getRandomCard(function(cardObject) {
 		//Random card
-		console.log(card);
+		console.log(cardObject.cardData);
+		console.log(cardObject.cardImage);
 	});
 
 	//Get cards by name
@@ -46,4 +48,5 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Release History
 
+* 0.2.0 Added Images to single cards
 * 0.1.0 Initial release

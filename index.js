@@ -5,18 +5,19 @@ module.exports = {
 
 	/**
 	 * Looks up a single card by ID and returns an 
-	 * object representing that card
+	 * object representing that card, and its image
 	 * @param {int} cardId The ID of the card to look up
 	 * @param {function} callback Callback function called when rest call returns
-	 * @return {object} A card object
+	 * @return {object} An object containing the card data and image
 	 */
 	getSingleCard : function(cardId, callback) {
 		var endPoint = '/cards';
 		var url = baseUrl + endPoint + '/' + cardId;
 		rest.get(url).on('complete', function(card) {
 			if (callback && typeof(callback) === "function") {  
-        		return callback(card);  
-    		}
+				var cardImage = 'http://api.mtgdb.info/content/card_images/' + card.id + '.jpeg';
+        			return callback({'cardData' : card, 'cardImage' : cardImage});  
+    			}
 		});
 	},
 
@@ -51,12 +52,18 @@ module.exports = {
 		});
 	},
 
+	/**
+	 * Gets a random card, and the associated card image (low quality)
+	 * @param {function} callback Callback function called when rest call returns
+	 * @return {object} An object containing the card object, and the card image
+	 **/
 	getRandomCard : function(callback) {
 		var endPoint = '/cards/random';
 		var url = baseUrl + endPoint;
 		rest.get(url).on('complete', function(card) {
 			if (callback && typeof(callback) === 'function') {
-				return callback(card);
+				var cardImage = 'http://api.mtgdb.info/content/card_images/' + card.id + '.jpeg';
+				return callback({'cardData' : card, 'cardImage' : cardImage});
 			}
 		});
 	}

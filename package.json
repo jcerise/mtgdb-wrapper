@@ -1,6 +1,6 @@
 {
   "name": "mtgdb-wrapper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple wrapper for the MtgDB JSON API located at api.mtgdb.info",
   "main": "index.js",
   "scripts": {
